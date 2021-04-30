@@ -1,0 +1,30 @@
+-------------Create Table Queries-------
+Create table details (
+Customer_Name Varchar(255) NOT NULL,
+Customer_Id Varchar(18) NOT NULL,
+Open_Date Date 'YYYYMMDD' NOT NULL,
+Last_Consulted_Date Date 'YYYYMMDD',
+Vaccination_Id CHAR(5),
+DR_NAME Varchar(255),
+State CHAR(5),
+Country CHAR(5),
+DOB Date 'YYYYMMDD',
+IS_ACTIVE CHAR(1)
+Primary_key(Customer_Name,Customer_Id,Open_Date));
+
+
+-------------------Load Data into Details Table-----------------
+LOAD DATA INFILE 'Details.txt'
+ INTO TABLE details
+ FIELDS TERMINATED BY '|'
+IGNORE 1 LINES;
+
+---------------Create country specific table--------------------
+
+Create table Table_India as select * from details where Country = 'IND';
+
+Create table Table_USA as select * from details where Country = 'USA';
+
+Create table Table_AU as select * from details where Country = 'AU';
+
+
